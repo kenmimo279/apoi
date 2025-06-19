@@ -194,3 +194,60 @@ function clearDNA() {
 }
 
 updateDNA();
+
+
+
+function predictNext() {
+  if (historyInputs.length === 0) return;
+
+  const [m1, m2, m3, s1, s2, s3] = historyInputs[historyInputs.length - 1];
+  const main = [m1, m2, m3];
+  const sub = [s1, s2, s3];
+
+  const countMain = countFreq(main);
+  const countSub = countFreq(sub);
+
+  let base = null;
+  let index = -1;
+
+  if (isUniform(main)) {
+    base = sub;
+    index = findUniqueIndex(sub);
+  } else if (isUniform(sub)) {
+    base = main;
+    index = findUniqueIndex(main);
+  } else {
+    const baseSide = lessVariety(main, sub);
+    base = baseSide === "main" ? main : sub;
+    index = findUniqueIndex(base);
+  }
+
+  let mainVal = main[index];
+  let subVal = sub[index];
+
+  let prediction = mainVal === subVal ? "P" : "B";
+
+  document.getElementById("prediction").textContent = prediction === "P" ? "🔵 P" : "🔴 B";
+  return prediction;
+}
+
+function countFreq(arr) {
+  return arr.reduce((acc, val) => { acc[val] = (acc[val] || 0) + 1; return acc; }, {});
+}
+
+function isUniform(arr) {
+  return arr.every(v => v === arr[0]);
+}
+
+function findUniqueIndex(arr) {
+  const count = countFreq(arr);
+  let min = Math.min(...Object.values(count));
+  let key = Object.keys(count).find(k => count[k] === min);
+  return arr.indexOf(key);
+}
+
+function lessVariety(arr1, arr2) {
+  const v1 = Object.keys(countFreq(arr1)).length;
+  const v2 = Object.keys(countFreq(arr2)).length;
+  return v1 <= v2 ? "main" : "sub";
+}
