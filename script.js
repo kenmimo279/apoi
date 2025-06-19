@@ -157,11 +157,9 @@ function analyzeAion() {
     return;
   }
 
-  const apiKey = "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";
 
   document.getElementById("aion-prediction").textContent = "🧠 กำลังวิเคราะห์...";
 
-  fetch("https://api.openai.com/v1/chat/completions", {
     method: "POST",
     headers: {
       "Authorization": "Bearer " + apiKey,
