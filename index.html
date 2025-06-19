@@ -1,0 +1,45 @@
+
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Baccarat AI Analyzer</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>🔍 Baccarat AI Analyzer</h1>
+
+  <div class="section">
+    <label>ใส่เค้าไพ่ (6 ตัว):</label>
+    <input type="text" id="pattern" maxlength="6" placeholder="เช่น pbpbpb">
+    <button onclick="analyzePattern()">วิเคราะห์</button>
+  </div>
+
+  <div class="section">
+    <label>ผลจริง:</label>
+    <button onclick="submitResult('P')">🔵 P</button>
+    <button onclick="submitResult('B')">🔴 B</button>
+    <button onclick="submitResult('T')">⚪️ T</button>
+  </div>
+
+  <div class="section">
+    <label>🧬 DNA (สูตรหลัก): <span id="dna-main"></span></label>
+    <label>🧬 DNA (AION): <span id="dna-aion"></span></label>
+    <button onclick="clearDNA()">🧹 ล้าง DNA</button>
+  </div>
+
+  <div class="section">
+    <label>🔑 OpenAI API Key:</label>
+    <input type="text" id="api-key" placeholder="sk-..." />
+    <button onclick="saveKey()">💾 บันทึก</button>
+  </div>
+
+  <div class="section" id="aion-output">
+    <h3>🧠 AION วิเคราะห์แนวโน้ม:</h3>
+    <div id="aion-prediction"></div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
